@@ -14,6 +14,7 @@ import space.starfish.starfishbatch.domain.Video;
 import space.starfish.starfishbatch.listener.JobDurationListener;
 import space.starfish.starfishbatch.processor.VideoProcessor;
 import space.starfish.starfishbatch.reader.DirectoryItemReader;
+import space.starfish.starfishbatch.service.VideoService;
 
 import java.io.File;
 
@@ -29,14 +30,17 @@ public class BatchConfiguration {
 
     private final StepBuilderFactory stepBuilderFactory;
 
-    public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+    private final VideoService videoService;
+
+    public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, VideoService videoService) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
+        this.videoService = videoService;
     }
 
     @Bean
     public VideoProcessor processor() {
-        return new VideoProcessor();
+        return new VideoProcessor(videoService);
     }
 
     @Bean

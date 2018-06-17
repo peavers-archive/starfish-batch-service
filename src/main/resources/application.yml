@@ -6,4 +6,4 @@ spring:
 # Test resource path, set this to where files live...
 starfish:
   movies:
-    directoryPath: "/media/media/Movies/**/*.*"
+    directoryPath: "/media/media/Music/**/*"
